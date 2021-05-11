@@ -91,7 +91,7 @@ export default function Search() {
         <div className="content-container">
                 <NavBar home="t" random="t"/>
         <div className="search-container">
-        <div className="tools">
+        <div className="calSearch">
             <Calculator />
             <div className="complex-Search">
             <p className="Instruction">Search By Nutrients:</p>

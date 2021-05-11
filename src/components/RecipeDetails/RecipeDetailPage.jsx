@@ -3,9 +3,8 @@ import {Link} from "react-router-dom";
 import CookingInstruction from "./CookingInstruction";
 import Ingredients from "./Ingredients";
 import RecipeTitle from "./RecipeTitle";
-import RecipeNutritions from "./RecipeNutritions";
 import RecipeSummary from "./RecipeSummary";
-import axios from 'axios';
+import Axios from 'axios';
 
 
  export default function RecipeDetailPage(props) {
@@ -21,9 +20,9 @@ import axios from 'axios';
       // console.log(props.id);
       //check if origin is from random page or seach page
       if(props.id!==undefined){
-        // if id not defined fetch data;
-        console.log(url);
-        axios.get(url).then(response=>{
+        // if id not defined, fetch data;
+        // console.log(url);
+        Axios.get(url).then(response=>{
           setRecipe(response.data)
           setLoading(false);
         })
@@ -31,11 +30,10 @@ import axios from 'axios';
           alert(`Status:${err.response.data.status}  Code:${err.response.data.code}   Message:${err.response.data.message}`)
       })
       }else{
-        console.log("food");
+        // console.log("food");
         setRecipe(props.foodData);
         setLoading(false);
       }
-
     },[]);
 
       if(isLoading){
@@ -47,7 +45,7 @@ import axios from 'axios';
       <div className="recipe-detail">
        {/* {!props.random&&<button className="button-default back"><Link to="/random">Back</Link></button>} */}
 
-        {!props.random &&<button className="button-default back"><Link to="/search">Back</Link></button>}
+        {!props.random &&<button className="button-default button-back"><Link to="/search">Back</Link></button>}
         <div className="recipe-summary-container"> 
          <RecipeTitle foodData={props.random?props.foodData:recipe}/>
          <Ingredients foodData={props.random?props.foodData:recipe}/>
