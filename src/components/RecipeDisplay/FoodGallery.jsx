@@ -10,7 +10,6 @@ import FoodDisplayCard from './FoodDisplayCard';
 
 
 import {
-    reduxDispatch,
     reduxSelector
   } from '../../store/index'
 
@@ -38,7 +37,7 @@ export default function FoodGallery() {
 
     return (
         <Grid container spacing={4}>
-        {(isLoading&&recipeData)
+        {/* {(isLoading&&recipeData)
         ?
             <Grid lg={12} md={12} sm={12} item>
                 <LinearProgress color="secondary" />
@@ -52,7 +51,18 @@ export default function FoodGallery() {
                 )
             })
         )
+        } */}
+
+        { recipeData&&recipeData.map((each)=>{
+                return(
+                <Grid lg={6} md={6} sm={12} item>
+                    <FoodDisplayCard recipe={each}/>
+                </Grid>
+                )
+            })
         }
+
+        
 
         </Grid>
     )

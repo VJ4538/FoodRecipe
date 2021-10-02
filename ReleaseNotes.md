@@ -19,3 +19,12 @@ Version 0.0.3
 -Working functionality: Home Page, Calculator, Search
 -Features to be added: Meal plan
 
+Version 0.0.3
+10/1/2021
+-Revised and added error handling and notification
+-Added auto generate food recipe to home page
+-Added featured title
+-Adjust layout styling
+-Search page recipe detail back button route fixed
+
+

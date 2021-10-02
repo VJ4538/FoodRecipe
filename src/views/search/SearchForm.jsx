@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import { Formik } from 'formik'
 import { Link } from 'react-router-dom';
 
@@ -45,7 +45,11 @@ import dietData from '../../data/dietType'
 import { searchRecipe } from '../../slices/searchResult'
 import { reduxDispatch, reduxSelector } from '../../store'
 
-  const useStyles = makeStyles((theme) => ({
+import ErrorBar from '../errors/ErrorBar'
+
+let init =false
+
+const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
         width: '100%',
@@ -77,6 +81,11 @@ export default function SearchForm({ className }) {
     const classes =useStyles()
     const dispatch =reduxDispatch()
     const searchResult=reduxSelector(store=>store.searchResult.searchResult)
+    // console.log(searchResult)
+    const [errorState, setErrorState] =useState({
+      open:false,
+      msg:'Something went Wrong!'
+    });
 
     const searchInstructions=[
       {
@@ -110,6 +119,18 @@ export default function SearchForm({ className }) {
     })
     
     const [isloading, setIsLoading] =useState(false)
+
+    const totalElements= searchResult.totalResults?searchResult.totalResults:pagination.totalElements
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return
+      }
+      setErrorState({
+          ...errorState,
+          open:false
+      })
+    };
 
     const searchRecipes = async (pageInfo)=>{
       setIsLoading(true)
@@ -164,19 +185,41 @@ export default function SearchForm({ className }) {
            query+=`&minCarbs=${searchProps.minCarbs}`
          }
        }
-       console.log(query+pageQuery)
-       const result = await dispatch(searchRecipe(query+pageQuery))
-       console.log('result', result)
+      //  console.log(query+pageQuery)
+       try{
+          const result = await dispatch(searchRecipe(query+pageQuery))
+          // console.log('result', result)
+          if(result.error){
+            // console.log(result.error)
+            const errorType =result.error.message.split("")
+            const msg =errorType[errorType.length-1]==='404'?'Error Code 404 bad request':'Reach max amount of request for current Spoonacular API Plan'
 
-      setPagination({
-        ...pageInfo,
-        totalElements: result.totalResults,
-      })
-      setIsLoading(false)
+            setErrorState({
+                msg:msg,
+                open:true
+              })
+              
+          }else{
+            setIsLoading(false)
+          }
+          setPagination({
+            ...pageInfo,
+            totalElements: result.payload.totalResults,
+          })      
+      }catch(e){
+          // console.error(e)
+      }
+
     }
 
     return (
       <>
+      {errorState.open&& 
+        <ErrorBar 
+            errorState={errorState}
+            handleClose={handleClose}
+      />}
+
       <Box m={2} component={Paper}>
 
         <Typography color='textPrimary' variant='h3' align='center'>
@@ -216,7 +259,6 @@ export default function SearchForm({ className }) {
           onSubmit={async (values, {resetForm}) => {
 
           try {
-
             searchRecipes(pagination)
 
           } catch (err) {
@@ -402,7 +444,7 @@ export default function SearchForm({ className }) {
                               variant="outlined"
                               color='secondary'
                               onClick={()=>{
-                              console.log('test',values.includeIngredient)
+                              // console.log('test',values.includeIngredient)
 
                               if(values.includeIngredient!==''){
                                   setFieldValue(`includeIngredients`, [...values.includeIngredients,
@@ -705,8 +747,8 @@ export default function SearchForm({ className }) {
         <HeaderDivider />
 
         <Typography color='textSecondary' gutterBottom variant='body2'>
-          {pagination.totalElements} Records found. Page {pagination.page + 1}{' '}
-          of {Math.ceil(pagination.totalElements / pagination.pageSize)}
+          {totalElements} Records found. Page {pagination.page + 1}{' '}
+          of {Math.ceil(totalElements / pagination.pageSize)}
         </Typography>
 
         <Table >
@@ -738,7 +780,7 @@ export default function SearchForm({ className }) {
                             <Button
                                 component={Link}
                                 fontSize='small'
-                                to={`/recipe/${each.id}`}
+                                to={`/recipe/${each.id}/search`}
                             >
                                 <SvgIcon fontSize='small'>
                                   <ArrowRightIcon />
@@ -762,7 +804,7 @@ export default function SearchForm({ className }) {
           // }}
           backIconButtonProps={{ disabled: pagination.page === 0 }}
           component='div'
-          count={pagination.totalElements}
+          count={totalElements}
           onChangePage={(event, page) => {
             const newPagination = {
               ...pagination,

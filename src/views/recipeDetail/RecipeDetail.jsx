@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function RecipeDetail({recipe}) {
+export default function RecipeDetail({recipe, isSearch}) {
     const classes = useStyles();
     const [checked, setChecked] = useState([0]);
     const handleToggle = (value) => () => {
@@ -85,11 +85,11 @@ export default function RecipeDetail({recipe}) {
                     <Button
                         color="secondary"
                         component={Link}
-                        to="/"
+                        to={isSearch?'/search':'/'}
                         variant="outlined"
                         startIcon={<ReturnIcon />}
                         >
-                        Back
+                        {isSearch?'Back to Search':'Back to Home'}
                     </Button>
                 </Grid>
 
@@ -160,7 +160,8 @@ export default function RecipeDetail({recipe}) {
                     <HeaderDivider/>
                 </Box>
                 <List>
-                {recipe&&recipe.analyzedInstructions[0].steps.map((each,idx) => {
+                {recipe.analyzedInstructions[0].length>0?
+                    recipe.analyzedInstructions[0].steps.map((each,idx) => {
                     const labelId = `recipe-Instruction-${each.idx}`;
                     return (
                     <ListItem
@@ -181,7 +182,9 @@ export default function RecipeDetail({recipe}) {
                         </ListItemButton>
                     </ListItem>
                     );
-                })}
+                })
+                :<ListItemText primary={`No Instructions from recivied from sponcular.`} />
+                }
                 </List>
 
             

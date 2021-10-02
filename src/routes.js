@@ -66,6 +66,12 @@ const routes = [
 
   {
     exact: true,
+    path: '/recipe/:recipeId/:search',
+    component: lazy(() => import('./views/recipeDetail/index')),
+  },
+
+  {
+    exact: true,
     path: '/article/:articleId',
     component: lazy(() => import('./views/articles/index')),
   },

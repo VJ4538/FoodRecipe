@@ -32,11 +32,13 @@ const useStyles= makeStyles({
 
 
 export default function Index(props) {
+    // console.log(props)
     const classes =useStyles()
     const dispatch=reduxDispatch()
     const [isloading, setIsLoading]=useState(true)
 
     const recipeId=props.match.params.recipeId
+    const isSearch=props.match.params.search
 
     const fetchDetailRecipeData = useCallback(async(recipeId) => {
         const result = await dispatch(fetchRecipeDetail(recipeId))
@@ -60,14 +62,8 @@ export default function Index(props) {
                         <LinearProgress />
                     :
                         recipe.recipeDetail &&
-                        <RecipeDetail recipe={recipe.recipeDetail} />
+                        <RecipeDetail recipe={recipe.recipeDetail} isSearch={isSearch} />
                     }
-
-                    {/* <button onClick={()=>{
-                        fetchDetailRecipeData(recipeId)
-                    }}>
-                        Fetch Details
-                    </button> */}
                     
                 </Paper>
             </Container>
