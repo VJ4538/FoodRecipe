@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import clsx from 'clsx'
 
 import * as Yup from 'yup'
@@ -29,9 +29,7 @@ import {
 } from '../../../store/index'
 
 import { calculateBMIResult } from '../../../slices/calculator'
-import HeaderDivider from '../../../components/HeaderDivider'
-
-
+import Title from '../../../components/Title'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
   THeader:{
     fontWeight:'bold',
-    FontFace:theme.typography.header.fontFamily
+    backgroundColor:theme.palette.background.dark
+  },
+  result:{
+    paddingTop:'0px !important',
+    marginLeft:'5px'
   }
 }));
 
@@ -87,7 +89,7 @@ const BMICalculator = ({ className, ...rest }) => {
         values,
         { resetForm }
       ) => {
-        console.log(values)
+        // console.log(values)
         try{
           dispatch(calculateBMIResult(values))
           resetForm()
@@ -113,18 +115,15 @@ const BMICalculator = ({ className, ...rest }) => {
             className={clsx(classes.root, className)}
             {...rest}
           >
-            <Box p={3}>
-              <Box>
+            <Box p={2}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={12}>
-                    <Typography align='left' gutterBottom={true} color='textPrimary' variant='h3' component='h3'>
-                      {'What is body mass index (BMI) :'}
-                    </Typography>
-                    <HeaderDivider />
-                    
-                    <Typography align='left' color='textSecondary' variant='h4' component='h4'>
+                    <Title title='What is BMI :' includeDivider={true} />
+
+                    <Typography align='left' color='textSecondary' variant='body2'>
                       {'Body mass index (BMI) is a measure of body fat based on height and weight that applies to adult men and women.'}
                     </Typography>
+
                   </Grid>
 
                   <Grid item xs={12} md={12} >
@@ -149,13 +148,11 @@ const BMICalculator = ({ className, ...rest }) => {
                     </Table>
                   </Grid>
                 </Grid>
-              </Box>
                         
             <CardContent>
-                <Typography align='center' gutterBottom={true} color='textPrimary' variant='h3' >
-                      {'Calculate your BMI today:'}
-                </Typography>
-                <HeaderDivider />
+              <Box pb={2}>
+                <Title title='Calculate your BMI today:' includeDivider={true} />
+              </Box>
               <Box>
                 <Grid container spacing={2}>
 
@@ -225,24 +222,22 @@ const BMICalculator = ({ className, ...rest }) => {
                 </Button>
             </DialogActions>
 
-
             {/* <pre className={classes.pre}>{JSON.stringify(values, null, 4)}</pre> */}
               {BMIResult&&(
               <Grid item xs={12} md={12}>
-              
-                <Typography align='left' color='textPrimary' variant='h3' component='h2'>
-                  {'Result:'}
-                </Typography>
+                <Title title='Result:' includeDivider={true} />
 
-                <Typography align='left' color='textSecondary' variant='h4' component='h2'>
-                  {`Your BMI is ${BMIResult}. `}
-                </Typography>
+                <Box display='flex' justifyContent='center'>
+                  <Typography color='textSecondary' variant='body2' >
+                    {`Your BMI is `}
+                  </Typography>
+
+                  <Title className={classes.result} title={BMIResult} includeDivider={false} />
+                </Box>
                     
               </Grid>
             )}
-
             </Box>
-
           </form>
         )
       }}

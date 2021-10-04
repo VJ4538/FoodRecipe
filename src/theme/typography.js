@@ -1,38 +1,43 @@
-import Robotothin from '../font/Roboto-Thin.ttf'
 
 export const typography={
-    header:{
-      fontFamily: `${Robotothin}',Arail`,
-    },
     h1: {
       fontWeight: 500,
       fontSize: 35,
-      letterSpacing: '-0.24px'
+      letterSpacing: '-0.24px',
+      fontFamily: 'Zen Dots'
     },
     h2: {
       fontWeight: 500,
       fontSize: 29,
-      
-      letterSpacing: '-0.24px'
+      letterSpacing: '-0.24px',
+      fontFamily: 'Zen Dots'
     },
     h3: {
       fontWeight: 500,
       fontSize: 24,
-      letterSpacing: '-0.06px'
+      letterSpacing: '-0.06px',
+      fontFamily: 'Zen Dots'
     },
     h4: {
       fontWeight: 500,
-      fontSize: 20,
-      letterSpacing: '-0.06px'
+      fontSize: 22,
+      letterSpacing: '-0.06px',
+      fontFamily: 'Zen Dots'
     },
     h5: {
       fontWeight: 500,
-      fontSize: 16,
-      letterSpacing: '-0.05px'
+      fontSize: 19,
+      letterSpacing: '-0.05px',
+      fontFamily: 'Zen Dots'
     },
     h6: {
-      fontWeight: 500,
-      fontSize: 14,
+      fontWeight: 200,
+      fontSize: 18,
+      letterSpacing: '-0.05px'
+    },
+    body2:{
+      fontWeight: 200,
+      fontSize: 18,
       letterSpacing: '-0.05px'
     },
     overline: {

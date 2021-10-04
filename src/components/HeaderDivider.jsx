@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         width:'50px',
         borderRadius:'15px',
         borderBottom:'2px solid #57CC99',
-        margin:'0.7rem auto',
+        margin:'0.3rem auto',
         marginTop:'0.2rem'
     }
   }));

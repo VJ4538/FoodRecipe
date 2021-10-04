@@ -18,8 +18,12 @@ const useStyles= makeStyles({
     },
     content:{
         paddingTop:'1%',
-        height:'90vh',
+        height:'80vh',
         overflow:'auto'
+    },
+    navBar:{
+        borderBottomRightRadius:'0px',
+        borderBottomLeftRadius:'0px',
     }
 })
 
@@ -48,9 +52,11 @@ export default function Index(props) {
     return (
     <Page title={articleId}>
         <Container size='lg' className={classes.root} >
-            <Paper elevation={4} className={classes.content}>
+            <Paper elevation={4} className={classes.navBar}>
                 <Narbar />
                 <Divider />
+            </Paper>
+            <Paper elevation={4} className={classes.content}>
                 <Result loading={isLoading} article={article}/>
             </Paper>
         </Container>

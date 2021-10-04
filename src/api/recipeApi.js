@@ -32,8 +32,6 @@ const recipeApi = {
       return result.data
     },
 
-    // https://api.spoonacular.com/recipes/complexSearch
-
   }
   
   export default recipeApi

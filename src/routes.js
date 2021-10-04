@@ -1,10 +1,6 @@
 import React, { Suspense, Fragment, lazy } from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 import LoadingScreen from './components/LoadingScreen'
-import error from './views/errors/NotFoundView'
-
-import Narbar from '../src/views/navBar/Narbar'
-
 
 export const renderRoutes = (routes = []) => (
   <Suspense fallback={<LoadingScreen />}>

@@ -31,9 +31,10 @@ export default function CalorieBreakdown({amount}) {
             })}
             >
                 <Typography
-                variant="h3" 
-                component="h4">
-                    <h3>{roundedValue}% </h3>
+                variant="h5"
+                color='textSecondary'
+                >
+                    {roundedValue}% 
                 </Typography>
                 
             </CircularProgressbarWithChildren>

@@ -7,7 +7,7 @@ export const fetchRandomRecipe = createAsyncThunk(
     'recipes/fetchRandomRecipe',
     async (number) => {
       const response = await recipeApi.generateRandomRecipe(number)
-      console.log('Recipe Response', response)
+      // console.log('Recipe Response', response)
       return response
     }
 )

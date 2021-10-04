@@ -25,8 +25,21 @@ Version 0.0.4
 -Added auto generate food recipe to home page
 -Adjust layout styling
 -Added featured article title
+
 Bug Fix:
 -Recipe detail page back button route
 -Search page total element display
+
+
+Version 0.0.5
+10/4/2021
+-Revised responsive design
+-Revised layout and styling
+-DRY-ed different pages with newly added title component
+
+Bug Fix:
+-Recipe Instruction
+-Navbar hover
+-Recipe detail page error handling
 
 

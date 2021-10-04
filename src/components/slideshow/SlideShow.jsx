@@ -1,17 +1,18 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import { 
-    Paper, 
     Button, 
     Box,
     useTheme,
     useMediaQuery,
     CardMedia,
+    Typography,
 } from '@material-ui/core'
 
 import { Link } from 'react-router-dom';
 
 import data from '../../data/articles'
+import Title from '../Title';
 
 export default function SlideShow(props) {
     const {articles} =data
@@ -47,14 +48,12 @@ function Item(props)
     const theme = useTheme();
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
     return (
-        <Paper 
-        style={{
-            padding:mobileDevice?'0.25rem 0.7rem':'1rem 2rem'
-        }}
-        >
+        <Box m={2}>
             <Box align='left'>
-                {mobileDevice?<h3>{props.item.title}</h3>:<h2>{props.item.title}</h2>}
-                <p style={{textIndent:'30px'}}>{props.item.description}</p>
+                <Title title={props.item.title} includeDivider={false} align='left'/>
+                <Typography style={{textIndent:'30px'}} color="textSecondary" variant='body2' >
+                    {props.item.description}
+                </Typography>
             </Box>
 
            <Box align='center' m={2}>
@@ -74,13 +73,14 @@ function Item(props)
                     component={Link}
                     to={`/article/${props.item.link}`}
                     color='secondary'
-                    // variant="contained" 
-                    size={mobileDevice?"small":"large"}>
+                    variant="outlined" 
+                    size={mobileDevice?"small":"medium"}
+                >
                 Learn More
                 </Button>
             </Box>
 
-        </Paper>
+        </Box>
         
     )
 }

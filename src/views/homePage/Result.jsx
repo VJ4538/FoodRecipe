@@ -6,15 +6,13 @@ import {
     makeStyles,
     Box,
     Button,
-    Typography,
     useTheme,
     useMediaQuery,
     LinearProgress,
+    Paper,
 } from '@material-ui/core';
 
 import FoodGallery from '../../components/RecipeDisplay/FoodGallery'
-import HeaderDivider from '../../components/HeaderDivider'
-
 import {
     reduxDispatch,
     reduxSelector,
@@ -22,6 +20,7 @@ import {
 
 import { fetchRandomRecipe } from '../../slices/recipes'
 import ErrorBar from '../errors/ErrorBar'
+import Title from '../../components/Title';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,53 +60,49 @@ export default function Result() {
                     errorState={errorState}
                     handleClose={handleClose}
                 />}
-
-                <Box mt={5}>
-                    <Typography align='center' gutterBottom={true}>
-                            {mobileDevice ?<h4>Featured articles:</h4>:<h3>Featured articles:</h3>}
-                    </Typography>
-                    <HeaderDivider/>
-                    <Box m={2} align='center'>
+            
+                <Box mt={5} component={Paper}>
+                    <Title title='Featured articles' includeDivider={true} />
                         <SlideShow/>
-                    </Box>
                 </Box>
 
-                <Box mt={5}>
-                  
-                    <Typography align='center' gutterBottom={true}>
-                        {mobileDevice ?<h4>Random Recipes:</h4>:<h3>Random Recipes:</h3>}
-                    </Typography>
-                    <HeaderDivider/>
-                    <Box m={2} align='center'>
-                    <Button
-                        onClick={async()=>{
-                            try{
-                                const result = await dispatch(fetchRandomRecipe(4))
-                                if(result.error){
-                                    // console.log(result.error)
-                                    const errorType =result.error.message.split("")
-                                    const msg =errorType[errorType.length-1]==='404'?'Error Code 404 bad request':'Reach max amount of request for current Spoonacular API Plan'
+                <Box mt={5} component={Paper}>
+                    <Title title='Random Recipes:' includeDivider={true} />
+                    <Box m={2} pb={3} align='center'>
+                        <Button
+                            onClick={async()=>{
+                                try{
+                                    const result = await dispatch(fetchRandomRecipe(4))
+                                    if(result.error){
+                                        // console.log(result.error)
+                                        const errorType =result.error.message.split("")
+                                        const msg =errorType[errorType.length-1]==='404'?'Error Code 404 bad request':'Reach max amount of request for current Spoonacular API Plan'
 
-                                    setErrorState({
-                                        msg:msg,
-                                        open:true
-                                    })
+                                        setErrorState({
+                                            msg:msg,
+                                            open:true
+                                        })
+                                    }
+                                }catch(e){
+                                    // console.log(e)
                                 }
-                            }catch(e){
-                                // console.log(e)
-                            }
-                        }}
-                        color='secondary' 
-                        variant="outlined" 
-                        size="large">
-                        Generate Random Recipes
-                    </Button>
+                            }}
+                            color='secondary' 
+                            variant="outlined" 
+                            size={mobileDevice?"small":"medium"}
+                            >
+                            Generate Random Recipes
+
+                        </Button>
                     </Box>
 
                     {isLoading
-                    ?<LinearProgress color="secondary" />
+                    ?
+                    <Box m={2} pb={2}>
+                        <LinearProgress color="secondary" />
+                    </Box>
                     :<FoodGallery />
-                    }
+                    }                   
                 </Box>
 
             </Container>

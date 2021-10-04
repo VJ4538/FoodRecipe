@@ -8,20 +8,17 @@ import {
     Button,
     Typography,
     makeStyles,
-    useTheme,
-    useMediaQuery,
 } from '@material-ui/core';
 
 import { 
     IoAlarmOutline as AlarmIcon,
     IoPeopleOutline as PeopleIcon,
-    IoFastFoodOutline as FoodIcon,
   } from "react-icons/io5";
+import Title from '../Title';
   
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 350,
       '& .MuiButton-outlined': {
         marginRight: '0'
       },
@@ -48,10 +45,7 @@ const useStyles = makeStyles({
   
 
 export default function FoodDisplayCard({recipe}) {
-
     const classes = useStyles();
-    const theme = useTheme();
-    const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
     return (
             <Card className={classes.root}>
                 <CardMedia
@@ -61,21 +55,14 @@ export default function FoodDisplayCard({recipe}) {
                 />
 
                 <CardContent>
-                    <Typography color="textPrimary" gutterBottom>
-                        {mobileDevice ?<h4>{recipe.title}:</h4>:<h3>{recipe.title}:</h3>}
-                    </Typography>
+                    <Title title={recipe.title} includeDivider={false} align='left' />
 
-                    {/* <Typography color="textPrimary" variant={mobileDevice?'h5':'h4'} component={mobileDevice?'h5':'h4'} gutterBottom>
-                        <FoodIcon className={classes.recipeIcon} /> 
-                        {`Calorie: ${recipe.readyInMinutes?recipe.readyInMinutes:'N/A'}`}
-                    </Typography> */}
-
-                    <Typography color="textPrimary" variant={mobileDevice?'h5':'h4'} component={mobileDevice?'h5':'h4'} gutterBottom>
+                    <Typography color="textSecondary" variant='h6' >
                         <AlarmIcon className={classes.recipeIcon} /> 
                         {`Ready In: ${recipe.readyInMinutes?recipe.readyInMinutes:'N/A'} Min`}
                     </Typography>
 
-                    <Typography color="textPrimary" variant={mobileDevice?'h5':'h4'} component={mobileDevice?'h5':'h4'} >
+                    <Typography color="textSecondary" variant='h6'>
                         <PeopleIcon className={classes.recipeIcon} /> 
                         {`Serving size: ${recipe.servings?recipe.servings:'N/A'}`}
                     </Typography>

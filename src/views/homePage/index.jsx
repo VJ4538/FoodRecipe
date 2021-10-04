@@ -25,8 +25,15 @@ const useStyles= makeStyles({
     },
     content:{
         paddingTop:'1%',
-        height:'90vh',
-        overflow:'auto'
+        height:'80vh',
+        overflow:'auto',
+        backgroundColor:'#F6F6F6',
+        borderTopRightRadius:'0px',
+        borderTopLeftRadius:'0px',
+    },
+    navBar:{
+        borderBottomRightRadius:'0px',
+        borderBottomLeftRadius:'0px',
     }
 })
 
@@ -81,9 +88,11 @@ export default function Index() {
                         handleClose={handleClose}
                     />
                 }
-                <Paper elevation={4} className={classes.content}>
+                <Paper elevation={4} className={classes.navBar}>
                     <Narbar />
                     <Divider />
+                </Paper>
+                <Paper elevation={4} className={classes.content}>
                     <Result/>
                 </Paper>
             </Container>

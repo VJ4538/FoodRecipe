@@ -1,10 +1,8 @@
 import React from 'react'
-import HeaderDivider from '../../components/HeaderDivider'
 import { 
     Box,
     List,
     ListItem,
-    ListItemText,
     Container,
     Typography,
     LinearProgress,
@@ -13,13 +11,15 @@ import {
     useTheme,
 useMediaQuery,
 } from '@material-ui/core'
+import Title from '../../components/Title'
 
 const useStyles= makeStyles({
     root:{
         
     },
     MuiCardMediaImg:{
-        maxHeight:'400px'
+        maxHeight:'400px',
+        marginTop:'20px'
     }
 
 })
@@ -42,10 +42,7 @@ export default function Result({loading, article}) {
             :
                 <Container>
                     <Box m={mobileDevice?2:5}>
-                        <Typography  align='center' gutterBottom={true}>
-                            {mobileDevice? <h3>{article.title}</h3>:<h2>{article.title}</h2>}
-                        </Typography>
-                        <HeaderDivider/>
+                        <Title title={article.title} includeDivider={true} />  
                         <CardMedia
                             className={classes.MuiCardMediaImg}
                             component="img"
@@ -54,46 +51,48 @@ export default function Result({loading, article}) {
                         />
                     </Box>
                     <Box >
-                        <Typography variant='h3' gutterBottom={true}>
-                            <h5>{article.subtitle1}</h5>
-                        </Typography>
+                        <Title 
+                            title={article.subtitle1} 
+                            includeDivider={mobileDevice?true:false} 
+                            align={mobileDevice?'center':'left'}     
+                            /> 
 
                         <List>
                             {subcontentList.map((each,idx)=>{
                                 return(
                                     <ListItem alignItems="flex-start">
-                                        <ListItemText
-                                            key={idx}
-                                            primary={`-${each}`}
-                                        />
+                                        <Typography color='textSecondary' variant='body2' >
+                                            {`-${each}`}
+                                        </Typography> 
                                     </ListItem>
                                 )
                             })}
                         </List>
 
-                        <Typography variant='h3' gutterBottom={true}>
-                            <h5>{article.summaryTitle}</h5>
-                        </Typography>
+                        <Title 
+                            title={article.summaryTitle} 
+                            includeDivider={mobileDevice?true:false} 
+                            align={mobileDevice?'center':'left'}  
 
-                        <Typography variant='body1' gutterBottom={true}>
+                        /> 
+
+                        <Typography color='textSecondary' variant='body2' gutterBottom={true}>
                             {article.summary}
-                        </Typography>
+                        </Typography> 
 
-                        
                         <List>
                             {summaryContentList.map((each,idx)=>{
                                 return(
                                     <ListItem alignItems="flex-start">
-                                        <ListItemText
-                                            key={idx}
-                                            primary={`-${each}`}
-                                        />
+                                        <Typography color='textSecondary' variant='body2' >
+                                            {`-${each}`}
+                                        </Typography> 
                                     </ListItem>
                                 )
                             })}
                         </List>
 
-                        <Typography variant='body1' align='right' gutterBottom={true}>
+                        <Typography variant='body2' align='right' gutterBottom={true}>
                             <a
                                 target='_blank'
                                 href={article.source}

@@ -2,7 +2,7 @@ import React from 'react'
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import routes, { renderRoutes } from './routes'
-import { Container, jssPreset, StylesProvider, ThemeProvider } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import { createTheme } from './theme/index'
 import useSettings from './hooks/useSettings'
 

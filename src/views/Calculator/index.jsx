@@ -23,8 +23,19 @@ const useStyles= makeStyles({
     },
     content:{
         paddingTop:'1%',
-        height:'90vh',
-        overflow:'auto'
+        height:'80vh',
+        overflow:'auto',
+        backgroundColor:'#F6F6F6',
+        borderTopRightRadius:'0px',
+        borderTopLeftRadius:'0px',
+    },
+    navBar:{
+        borderBottomRightRadius:'0px',
+        borderBottomLeftRadius:'0px',
+    },
+    tabMenu:{
+        fontFamily:'Zen Dots',
+        fontSize:'13px'
     }
 })
 
@@ -58,25 +69,30 @@ export default function Index() {
     return (
         <Page title='Calculators'>
             <Container size='lg' className={classes.root} >
-                <Paper elevation={3} className={classes.content}>
+                <Paper elevation={4} className={classes.navBar}>
                     <Narbar />
                     <Divider />
-                    <Box p={3}>
-                        <Tabs
-                            onChange={handleTabsChange}
-                            scrollButtons='auto'
-                            value={currentTab}
-                            variant='scrollable'
-                            textColor='secondary'
-                        >
-                            {tabs.map((tab) => (
-                            <Tab key={tab.value} label={tab.label} value={tab.value} />
-                            ))}
-                        </Tabs>
-                    </Box>
+                </Paper>
+                <Paper elevation={4} className={classes.content}>
+                    <Box m={3} component={Paper}>
+                        <Box p={2}>
+                            <Tabs
+                                onChange={handleTabsChange}
+                                scrollButtons='auto'
+                                value={currentTab}
+                                variant='scrollable'
+                                textColor='Primary'
+                            >
+                                {tabs.map((tab) => (
+                                <Tab className={classes.tabMenu} key={tab.value} label={tab.label} value={tab.value} />
+                                ))}
+                            </Tabs>
+                            <Divider />
+                        </Box>
+
                     {currentTab==='BMI'&& <BMICalculator />}
                     {currentTab==='Calorie'&& <CalorieCalculator />}
-                    
+                    </Box>
                 </Paper>
             </Container>
         </Page>

@@ -32,7 +32,7 @@ import {
 
 import NutritionDetail from './NutritionDetail';
 import { Link } from 'react-router-dom';
-import HeaderDivider from '../../components/HeaderDivider';
+import Title from '../../components/Title';
 
 
 
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor:theme.palette.background.dark
     },
     Ingredients:{
-        maxHeight:'390px',
+        maxHeight:'450px',
         overflow:'auto'
     }
 }));
@@ -75,12 +75,12 @@ export default function RecipeDetail({recipe, isSearch}) {
     
         setChecked(newChecked);
       };
+
     return (
         <React.Fragment>
             <Container 
                 maxWidth="lg"
             >   
-            
                 <Grid lg={12} md={12} sm={12} item mt={2} align='right'>
                     <Button
                         color="secondary"
@@ -93,45 +93,44 @@ export default function RecipeDetail({recipe, isSearch}) {
                     </Button>
                 </Grid>
 
-                <Box mt={2}>
-                    <Typography color="textPrimary" align='center'>
-                        <h3>Recipe Detail:</h3>
-                    </Typography>
-                    <HeaderDivider/>
-                </Box>
+                {/* <Title title={'Recipe Detail:'} includeDivider={true} /> */}
 
-                <Grid container   
+              <Grid container   
                 direction="row"
                 justifyContent="space-evenly"
-                mt={2}
+                spacing={2}
                 >
                     <Grid lg={6} md={6} sm={6} item >
-                        <Typography color="textPrimary" align='center' gutterBottom>
-                            <h3>{recipe&&recipe.title}</h3>
-                        </Typography>
+                        <Box mt={2} mb={1} >
+                            <Title title={recipe&&recipe.title} includeDivider={true} />
+                        </Box>
                         <CardMedia
                             component="img"
                             alt={`${recipe.title} image`}
                             image={recipe.image}
                         />
                         <Box mt={2} className={classes.flexContainer}>
-                            <Typography color="textPrimary" variant="h4" gutterBottom>
+                            <Typography color="textSecondary" variant="h6" gutterBottom>
                                 <AlarmIcon className={classes.recipeIcon} /> 
                                 {`Ready In: ${recipe.readyInMinutes?recipe.readyInMinutes:'N/A'} Min`}
                             </Typography>
 
-                            <Typography color="textPrimary" variant="h4" gutterBottom>
+                            <Typography color="textSecondary" variant="h6" gutterBottom>
                                 <PeopleIcon className={classes.recipeIcon} /> 
                                 {`Servings: ${recipe.servings?recipe.servings:'N/A'}`}
                             </Typography>
                         </Box>
                     </Grid>
 
-                    <Grid lg={5} md={5} sm={5} item className={classes.Ingredients}>
+                    <Grid lg={6} md={6} sm={6} item >
+                        <Box mt={2} mb={1} >
+                            <Title title='Ingredients' includeDivider={true} />
+                        </Box>
+                        <Box className={classes.Ingredients} >
                             <Table size="small" stickyHeader >
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell width="65%" className={classes.THeader}>Ingredient</TableCell>
+                                        <TableCell width="65%" className={classes.THeader}>Name</TableCell>
                                         <TableCell className={classes.THeader}>Amount</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -144,23 +143,23 @@ export default function RecipeDetail({recipe, isSearch}) {
                                                     <TableCell >{+each.amount.toFixed(2)} {each.unit} </TableCell>
                                                 </TableRow>
                                             )
+                                        }else{
+                                            return ""
                                         }
                                     })}
                                 </TableBody>
                             </Table>
+                        </Box>
                     </Grid>
                 </Grid>
 
                 <NutritionDetail recipe={recipe}/>
 
-                <Box mt={2}>
-                    <Typography color="textPrimary" align='center'>
-                        <h3>Instruction:</h3>
-                    </Typography>
-                    <HeaderDivider/>
+                <Box mt={2} mb={1} >
+                    <Title title='Instruction:' includeDivider={true} />
                 </Box>
                 <List>
-                {recipe.analyzedInstructions[0].length>0?
+                {recipe.analyzedInstructions[0].steps.length>0?
                     recipe.analyzedInstructions[0].steps.map((each,idx) => {
                     const labelId = `recipe-Instruction-${each.idx}`;
                     return (
@@ -178,7 +177,9 @@ export default function RecipeDetail({recipe, isSearch}) {
                             inputProps={{ 'aria-labelledby': labelId }}
                             />
                         </ListItemIcon>
-                            <ListItemText id={labelId} primary={`${idx+1}:  ${each.step?each.step:'N/A'}`} />
+                            <Typography color="textSecondary" variant="body2" >
+                                {`${idx+1}:  ${each.step?each.step:'N/A'}`}
+                            </Typography>
                         </ListItemButton>
                     </ListItem>
                     );
@@ -186,8 +187,6 @@ export default function RecipeDetail({recipe, isSearch}) {
                 :<ListItemText primary={`No Instructions from recivied from sponcular.`} />
                 }
                 </List>
-
-            
             </Container>
         </React.Fragment>
     )

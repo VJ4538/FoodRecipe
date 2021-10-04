@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import clsx from 'clsx'
 
 import * as Yup from 'yup'
@@ -6,8 +6,8 @@ import { Formik } from 'formik'
 
 import {
   Box,
-  CardContent,
   Button,
+  CardContent,
   DialogActions,
   Grid,
   TextField,
@@ -27,9 +27,7 @@ import {
    calculateCalorieResult, 
    resetResults 
   } from '../../../slices/calculator'
-import HeaderDivider from '../../../components/HeaderDivider'
-
-
+import Title from '../../../components/Title'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
   genderLabel:{
     paddingTop:'12px',
     paddingRight:'10px'
+  },
+  result:{
+    paddingTop:'0px !important',
+    margin:'auto 5px'
   }
 }));
 
@@ -138,18 +140,16 @@ const CalorieCalculator = ({ className, ...rest }) => {
             className={clsx(classes.root, className)}
             {...rest}
           >
-            <Box p={3}>
+            <Box p={2}>
               <Box>
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={12}>
-                    <Typography gutterBottom={true} color='textPrimary' variant='h3' align='center'>
-                      {'Why calculate calories?'}
-                    </Typography>
-                    <HeaderDivider/>
+                    <Title title='Why calculate calories?' includeDivider={true} />
 
-                    <Typography align='left' color='textSecondary' variant='body1'>
+                    <Typography align='left' color='textSecondary' variant='body2'>
                       {'Estimate the number of calories a person needs to consume each day can provide some simple guidelines for gaining or losing weight.'}
                     </Typography>
+
                   </Grid>
 
                 </Grid>
@@ -157,12 +157,8 @@ const CalorieCalculator = ({ className, ...rest }) => {
                         
             <CardContent>
               <Box p={2}>
-                <Typography align='center' gutterBottom={true} color='textPrimary' variant='h3'>
-                      {'Calculate calories:'}
-                </Typography>
-                <HeaderDivider/>
+                <Title title='Calculate calories:' includeDivider={true} />
               </Box>
-              <Box>
                 <Grid container spacing={2}>
 
                 {/* <Grid item xs={12} sm={12} md={6} > 
@@ -366,9 +362,8 @@ const CalorieCalculator = ({ className, ...rest }) => {
                     </TextField>
                   </Grid>
 
-
                 </Grid>
-              </Box>
+
             </CardContent>
            
             <DialogActions >
@@ -399,24 +394,25 @@ const CalorieCalculator = ({ className, ...rest }) => {
 
             {calorieResult.maintain&&(
               <Grid item xs={12} md={12}>
+                <Title title='Result:' includeDivider={true} />
 
-                <Typography align='center' gutterBottom={true} color='textPrimary' variant='h3'>
-                  {'Result:'}
-                </Typography>
-                <HeaderDivider/>
-
-                <Typography align='left' gutterBottom={true} color='textSecondary' variant='body1'>
-                  {`${calorieResult.maintain} is the amount of caloires you need daily to maintain your current weight.`}
-                </Typography>
-                  
+                <Box display='flex' justifyContent='left'> 
+                  <Typography color='textSecondary' variant='body2' >
+                    {`The amount of caloires you need daily to maintain your current weight is`}
+                  </Typography>
+                  <Title className={classes.result} title={calorieResult.maintain} includeDivider={false} />
+                </Box>
               </Grid>
             )}
 
             {calorieResult.goal&&(
               <Grid item xs={12} md={12}>
-                <Typography align='left' gutterBottom={true} color='textSecondary' variant='body1'>
-                  {`${calorieResult.goal} is the amount of caloires you need daily to reach your goal.`}
-                </Typography>
+                <Box display='flex' justifyContent='left'>
+                  <Typography color='textSecondary' variant='body2' >
+                    {`The amount of caloires you need daily to reach your goal is `}
+                  </Typography>
+                  <Title className={classes.result} title={calorieResult.goal} includeDivider={false} />
+                </Box>
                     
               </Grid>
             )}

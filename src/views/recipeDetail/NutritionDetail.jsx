@@ -16,7 +16,7 @@ import {
  } from '@material-ui/core'
 
 import CalorieBreakdown from './CalorieBreakdown';
-import HeaderDivider from '../../components/HeaderDivider';
+import Title from '../../components/Title';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,46 +58,38 @@ export default function NutritionDetail({recipe}) {
 
     return (
       <Box>
-
         <Box mt={2}>
-          <Typography color="textPrimary" align='center'>
-            <h3>Calorie Breakdown:</h3>
-          </Typography>
-          <HeaderDivider/>
+          <Title title='Calorie Breakdown:' includeDivider={true} />
         </Box>
-
-
-        
         <Grid 
           container   
           direction="row"
           justifyContent="space-evenly"
         >
           <Grid lg={4} md={6} sm={6} item className={classes.calorieBreakdown}>
-              <Typography variant={mobileDevice?'h4':'h3'} component={mobileDevice?'h4':'h3'} align='center' gutterBottom >
-              {`Protein percent:`}
+              <Typography color='textSecondary' variant={mobileDevice?'h6':'h5'} align='center' gutterBottom >
+                {`Protein percent:`}
               </Typography>
               <CalorieBreakdown amount={caloricBreakdown.percentProtein}/>
           </Grid>
+
           <Grid lg={4} md={6} sm={6} item className={classes.calorieBreakdown}>
-              <Typography variant={mobileDevice?'h4':'h3'} component={mobileDevice?'h4':'h3'} align='center' gutterBottom >
-              {`Fat percent:`}
+              <Typography color='textSecondary' variant={mobileDevice?'h6':'h5'} align='center' gutterBottom >
+                {`Fat percent:`}
               </Typography>
               <CalorieBreakdown amount={caloricBreakdown.percentFat}/>
           </Grid>
+
           <Grid lg={4} md={6} sm={6} item className={classes.calorieBreakdown}>
-              <Typography variant={mobileDevice?'h4':'h3'} component={mobileDevice?'h4':'h3'} align='center' gutterBottom >
-              {`Carbs percent:`}
+              <Typography color='textSecondary' variant={mobileDevice?'h6':'h5'} align='center' gutterBottom >
+                {`Carbs percent:`}
               </Typography>
               <CalorieBreakdown amount={caloricBreakdown.percentCarbs}/>
           </Grid>
         </Grid>
 
-        <Box mt={2}>
-          <Typography color="textPrimary" align='center'>
-            <h3>Nutrients:</h3>
-          </Typography>
-          <HeaderDivider/>
+        <Box mt={2} mb={2}>
+          <Title title='Nutrients:' includeDivider={true} />
         </Box>
         
         <Grid 
@@ -137,11 +129,3 @@ export default function NutritionDetail({recipe}) {
       </Box>
     )
 }
-
-
-// nutritionData.good&&nutritionData.good.map((each)=>{
-//     console.log(each)
-//     return(
-    
-//     )
-// })

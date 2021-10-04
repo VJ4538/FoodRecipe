@@ -17,6 +17,7 @@ import {
   } from '../../store/index'
 
 import { fetchRecipeDetail } from '../../slices/recipeDetail'
+import ErrorBar from '../errors/ErrorBar'
 
 const useStyles= makeStyles({
     root:{
@@ -25,8 +26,14 @@ const useStyles= makeStyles({
     },
     content:{
         paddingTop:'1%',
-        height:'90vh',
-        overflow:'auto'
+        height:'80vh',
+        overflow:'auto',
+        borderTopRightRadius:'0px',
+        borderTopLeftRadius:'0px',
+    },
+    navBar:{
+        borderBottomRightRadius:'0px',
+        borderBottomLeftRadius:'0px',
     }
 })
 
@@ -36,13 +43,40 @@ export default function Index(props) {
     const classes =useStyles()
     const dispatch=reduxDispatch()
     const [isloading, setIsLoading]=useState(true)
+    const [errorState, setErrorState] =useState({
+        open:false,
+        msg:'Something went Wrong!'
+    });
 
     const recipeId=props.match.params.recipeId
     const isSearch=props.match.params.search
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return
+        }
+        setErrorState({
+            ...errorState,
+            open:false
+        })
+    };
 
     const fetchDetailRecipeData = useCallback(async(recipeId) => {
-        const result = await dispatch(fetchRecipeDetail(recipeId))
-        // console.log(result)
+        try{
+            const result = await dispatch(fetchRecipeDetail(recipeId))
+            // console.log(result)
+            if(result.error){
+                // console.log(result.error)
+                const errorType =result.error.message.split("")
+                const msg =errorType[errorType.length-1]==='404'?'Error Code 404 bad request':'Reach max amount of request for current Spoonacular API Plan'
+    
+                setErrorState({
+                    msg:msg,
+                    open:true
+                    })
+            }
+            }catch(e){
+                // console.error(e)
+            }
         setIsLoading(false)
       }, [dispatch]);
 
@@ -55,9 +89,17 @@ export default function Index(props) {
     return (
         <Page title='Recipe Detail'>
             <Container size='lg' className={classes.root} >
-                <Paper elevation={4} className={classes.content}>
+                {errorState.open&& 
+                    <ErrorBar 
+                        errorState={errorState}
+                        handleClose={handleClose}
+                    />
+                }
+                <Paper elevation={4} className={classes.navBar}>
                     <Narbar />
                     <Divider />
+                </Paper>
+                <Paper elevation={4} className={classes.content}>
                     {isloading?
                         <LinearProgress />
                     :

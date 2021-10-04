@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+
 import { 
     BottomNavigation,
     BottomNavigationAction,
     Container,
     makeStyles,
-    
 } from '@material-ui/core'
 
 import { Link } from 'react-router-dom';
@@ -19,15 +19,18 @@ import {
 
 const useStyles = makeStyles(theme=>({
     root: {
-      paddingTop:'1rem',
-      paddingBottom:'1rem',
-      '& .Mui-selected': {
-        borderBottom:'2px solid #57CC99'
-      },
+      paddingTop:'1.3rem',
+      paddingBottom:'1.3rem',
+
       '& .MuiBottomNavigationAction-root': {
-        border:'none'
+        "&:hover": {
+          color: '#57CC99'
+        },
       },
     },
+    selected:{
+      color:'#57CC99'
+    }
 }));
 
 
@@ -37,6 +40,7 @@ const Narbar=()=>{
       <Container size='lg' className={classes.root}>
         <BottomNavigation
           showLabels
+          className={classes.NavBar}
         >
           <BottomNavigationAction 
               component={Link}
@@ -45,7 +49,6 @@ const Narbar=()=>{
               icon={<HomeIcon size={35} />}    
               value={0}
           />
-
           <BottomNavigationAction 
               component={Link}
               to="/calculator"
