@@ -3,7 +3,7 @@ const data = {
         {   
             title: "Healthy Eating for a Healthy Weight",
             description: " An eating plan that helps manage your weight includes a variety of healthy foods!",
-            src:"/images/eatingHabit.jpg",
+            src:"/images/eatingHabit.webp",
             source:"https://www.cdc.gov/healthyweight/healthy_eating/index.html",
             link:'article1',
             subtitle1:'What is a health eating plan?',
@@ -17,7 +17,7 @@ const data = {
         {
             title: "Benefits of Physical Activity",
             description: "Regular physical activity is one of the most important things you can do for your health.",
-            src:"/images/excercise.jpg",
+            src:"/images/excercise.webp",
             source:"https://www.cdc.gov/physicalactivity/basics/pa-health/index.htm",
             link:'article2',
             subtitle1:'Immediate Benefits',

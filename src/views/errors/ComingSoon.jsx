@@ -69,7 +69,7 @@ const ComingSoon = () => {
                 <img
                     alt="Under development"
                     className={classes.image}
-                    src="/images/coming-soon.png"
+                    src="/images/coming-soon.webp"
                 />
             </Box> 
         

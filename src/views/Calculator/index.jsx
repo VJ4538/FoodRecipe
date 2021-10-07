@@ -15,6 +15,8 @@ import {
 
 import { resetResults } from '../../slices/calculator'
 import { reduxDispatch } from '../../store/index'
+import { useHistory } from 'react-router-dom'
+import { setNavPosition } from '../../slices/navbar'
 
 const useStyles= makeStyles({
     root:{
@@ -42,7 +44,14 @@ const useStyles= makeStyles({
 export default function Index() {
     const classes =useStyles()
     const dispatch = reduxDispatch()
+    const history = useHistory()
 
+    useEffect(() => {
+        if(history.location.pathname==='/calculator'){
+            dispatch(setNavPosition(1))
+        }
+    }, [dispatch, history])
+    
     const tabs=[
         {
             label:'BMI Calculator',

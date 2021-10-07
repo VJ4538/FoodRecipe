@@ -16,6 +16,9 @@ import {
 import { fetchRandomRecipe } from '../../slices/recipes'
 import ErrorBar from '../errors/ErrorBar';
 
+import { useHistory } from 'react-router-dom'
+import { setNavPosition } from '../../slices/navbar'
+
 let init =false;
 
 const useStyles= makeStyles({
@@ -40,6 +43,8 @@ const useStyles= makeStyles({
 
 export default function Index() {
     const dispatch=reduxDispatch()
+    const history = useHistory()
+
     const [errorState, setErrorState] =useState({
         open:false,
         msg:'Something went Wrong!'
@@ -77,6 +82,12 @@ export default function Index() {
             }
         } 
     },[dispatch])
+
+    useEffect(() => {
+        if(history.location.pathname==='/'){
+            dispatch(setNavPosition(0))
+        }
+    }, [dispatch, history])
 
     const classes =useStyles()
     return (

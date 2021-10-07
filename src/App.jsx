@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/core'
 import { createTheme } from './theme/index'
 import useSettings from './hooks/useSettings'
 
+
 const history = createBrowserHistory()
 
 const App = () => {

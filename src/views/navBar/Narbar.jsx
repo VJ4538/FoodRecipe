@@ -16,6 +16,7 @@ import {
   IoSearchOutline as SearchIcon,
   IoRestaurantOutline as PlanMealIcon,
 } from "react-icons/io5";
+import { reduxSelector } from '../../store';
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -36,18 +37,21 @@ const useStyles = makeStyles(theme=>({
 
 const Narbar=()=>{
     const classes = useStyles();
+
+    const position = reduxSelector(store=>store.navbar.navbarPosition)
+    
     return (
       <Container size='lg' className={classes.root}>
         <BottomNavigation
           showLabels
           className={classes.NavBar}
+          value={position }
         >
           <BottomNavigationAction 
               component={Link}
               to="/"
               label="Home" 
               icon={<HomeIcon size={35} />}    
-              value={0}
           />
           <BottomNavigationAction 
               component={Link}
