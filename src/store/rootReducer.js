@@ -4,6 +4,7 @@ import { reducer as calculatorReducer} from '../slices/calculator'
 import { reducer as recipeDetailReducer } from '../slices/recipeDetail'
 import { reducer as searchResultReducer } from '../slices/searchResult'
 import { reducer as navBarReducer } from '../slices/navbar'
+import { reducer as mealPlanReducer } from '../slices/mealPlan'
 
 
 const rootReducer= combineReducers({
@@ -12,6 +13,7 @@ const rootReducer= combineReducers({
     recipeDetail:recipeDetailReducer,
     searchResult:searchResultReducer,
     navbar:navBarReducer,
+    mealPlan:mealPlanReducer,
 })
 
 export default rootReducer

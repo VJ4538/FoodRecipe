@@ -42,4 +42,19 @@ Bug Fix:
 -Navbar hover
 -Recipe detail page error handling
 
+Version 0.0.6
+10/10/2021
+-Added Meal Plan
+-Enhanced error handling
+-Revised api files
+
+Bug Fix:
+-Netlify SPA routing issue
+-Navbar active
+
+-Working functionality: Home Page, Calculator, Search, Meal Plan
+-Features to be added: Account, new styling
+
+
+
 

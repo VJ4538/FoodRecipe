@@ -19,6 +19,8 @@ import {
 import { fetchRecipeDetail } from '../../slices/recipeDetail'
 import ErrorBar from '../errors/ErrorBar'
 
+import { setNavPosition } from '../../slices/navbar'
+
 const useStyles= makeStyles({
     root:{
         paddingTop:'5vh',
@@ -48,6 +50,7 @@ export default function Index(props) {
         msg:'Something went Wrong!'
     });
 
+    const recipe = reduxSelector(store=>store.recipeDetail)
     const recipeId=props.match.params.recipeId
     const isSearch=props.match.params.search
     const handleClose = (event, reason) => {
@@ -84,7 +87,9 @@ export default function Index(props) {
         fetchDetailRecipeData(recipeId)
     },[recipeId,fetchDetailRecipeData])
 
-    const recipe = reduxSelector(store=>store.recipeDetail)
+    useEffect(() => {
+            dispatch(setNavPosition(4))
+    }, [dispatch])
 
     return (
         <Page title='Recipe Detail'>

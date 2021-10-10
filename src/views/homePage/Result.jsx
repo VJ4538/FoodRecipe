@@ -33,6 +33,7 @@ export default function Result() {
     const theme = useTheme()
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'))
     const isLoading =reduxSelector(store=>store.recipes.loading)
+    const recipeData = reduxSelector(store=>store.recipes.recipeData)
 
     const [errorState, setErrorState] =useState({
         open:false,
@@ -101,7 +102,12 @@ export default function Result() {
                     <Box m={2} pb={2}>
                         <LinearProgress color="secondary" />
                     </Box>
-                    :<FoodGallery />
+                    :<FoodGallery 
+                        data={recipeData}
+                        lg={6} 
+                        md={6} 
+                        sm={12}
+                    />
                     }                   
                 </Box>
 

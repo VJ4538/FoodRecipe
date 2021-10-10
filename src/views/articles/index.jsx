@@ -11,6 +11,9 @@ import {
     makeStyles
 } from '@material-ui/core'
 
+import { setNavPosition } from '../../slices/navbar'
+import { reduxDispatch } from '../../store/index'
+
 const useStyles= makeStyles({
     root:{
         paddingTop:'5vh',
@@ -30,6 +33,7 @@ const useStyles= makeStyles({
 export default function Index(props) {
     const articleId=props.match.params.articleId
     const classes =useStyles()
+    const dispatch = reduxDispatch()
 
     const { articles } = data
     // console.log(articles)
@@ -48,6 +52,10 @@ export default function Index(props) {
     useEffect(()=>{
         findTargetArticle(articles)
     },[findTargetArticle, articles])
+
+    useEffect(() => {
+        dispatch(setNavPosition(4))
+    }, [dispatch])
 
     return (
     <Page title={articleId}>

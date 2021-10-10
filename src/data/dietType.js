@@ -8,6 +8,9 @@ const dietData={
             id:"dietType-Gluten-Free",
             value:'GlutenFree',
         },
+        {   id:"dietType-Pescetarian",
+            value:'Pescetarian'
+        }
     ],
 }
 export default dietData

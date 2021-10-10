@@ -19,6 +19,7 @@ import Title from '../Title';
 
 const useStyles = makeStyles({
     root: {
+        border: '1px solid rgba(87, 204, 153, 0.5)',
       '& .MuiButton-outlined': {
         marginRight: '0'
       },
@@ -48,11 +49,13 @@ export default function FoodDisplayCard({recipe}) {
     const classes = useStyles();
     return (
             <Card className={classes.root}>
+                {recipe.image&&
                 <CardMedia
                     component="img"
                     alt={`${recipe.title} image`}
                     image={recipe.image}
                 />
+                }
 
                 <CardContent>
                     <Title title={recipe.title} includeDivider={false} align='left' />

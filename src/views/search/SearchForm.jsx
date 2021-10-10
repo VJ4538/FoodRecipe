@@ -38,7 +38,7 @@ import {
 
 import cuisineData from '../../data/cuisineType'
 import dietData from '../../data/dietType'
-import searchInstructions from '../../data/SearchInstructions';
+import searchInstructions from '../../data/SearchInstructions'
 
 import { searchRecipe } from '../../slices/searchResult'
 import { reduxDispatch, reduxSelector } from '../../store'
@@ -208,19 +208,21 @@ export default function SearchForm() {
       />}
 
         <Box m={3} component={Paper}>
-          <Title title='Instructions for search:' includeDivider={true} />
-          <List>
-          {searchInstructions.searchInstructions&&searchInstructions.searchInstructions.map((each,idx) => {
-              return (
-              <ListItem
-                  key={`instruction-${each.idx}`}
-                  disablePadding
-              >
-                <ListItemText secondary={`${idx+1}:  ${each.step?each.step:'N/A'}`} />
-              </ListItem>
-              );
-          })}
-          </List>
+          <Title title='Instructions:' includeDivider={true} />
+          <Box p={1}>
+            <List>
+            {searchInstructions.searchInstructions&&searchInstructions.searchInstructions.map((each,idx) => {
+                return (
+                <ListItem
+                    key={`instruction-${each.idx}`}
+                    disablePadding
+                >
+                  <ListItemText secondary={`${idx+1}:  ${each.step?each.step:'N/A'}`} />
+                </ListItem>
+                );
+            })}
+            </List>
+          </Box>
 
 
         {/*Search Filter*/}
@@ -261,10 +263,9 @@ export default function SearchForm() {
         }) => {
           return (
             <>
-              <Grid container spacing={3}>
-                <Grid item md={12} xl={12} xs={12}>
+                 <Box p={3} pt={1}>
                     <form onSubmit={handleSubmit}>  
-                      <Box className={`${classes.filterItem}`} display='flex'>
+                      <Box pb={2} display='flex'>
                             <TextField
                               fullWidth
                               InputProps={{
@@ -327,7 +328,7 @@ export default function SearchForm() {
                             </Button>
                           </Box>
 
-                      <Box className={`${classes.filterItem}`}>
+
                         <Grid container spacing={2}>
                           <Grid item lg={6} xs={12} md={6}>
                             <TextField
@@ -491,7 +492,7 @@ export default function SearchForm() {
                                 }}
                               >
                                 
-                                <Title title='Instructions for search:' includeDivider={true} />
+                                <Title title='Complex search:' includeDivider={true} />
 
                                 {searchProps.open ? (
                                   <ChevronUpIcon />
@@ -705,12 +706,10 @@ export default function SearchForm() {
                           </Grid>
 
                         </Grid>
-                      </Box>
                         {/* <pre className={classes.pre}>{JSON.stringify(values, null, 4)}</pre>
                         <pre className={classes.pre}>{JSON.stringify(searchProps, null, 4)}</pre> */}
                     </form>
-                </Grid>
-              </Grid>
+                    </Box>
             </>
           )
         }}
@@ -756,7 +755,7 @@ export default function SearchForm() {
                               <Button
                                   component={Link}
                                   fontSize='small'
-                                  to={`/recipe/${each.id}/search`}
+                                  to={`/recipe/${each.id}`}
                               >
                                   <SvgIcon fontSize='small'>
                                     <ArrowRightIcon />

@@ -51,7 +51,7 @@ const routes = [
   {
     exact:true,
     path: '/mealplan',
-    component: lazy(() => import('./views/errors/ComingSoon')),
+    component: lazy(() => import('./views/mealPlan/index')),
   },
 
   {

@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme=>({
 
       '& .MuiBottomNavigationAction-root': {
         "&:hover": {
-          color: '#57CC99'
+          // color: '#57CC99'
         },
       },
     },

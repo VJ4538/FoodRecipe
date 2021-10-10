@@ -34,6 +34,8 @@ import NutritionDetail from './NutritionDetail';
 import { Link } from 'react-router-dom';
 import Title from '../../components/Title';
 
+import { useHistory } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,8 +62,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function RecipeDetail({recipe, isSearch}) {
+export default function RecipeDetail({recipe}) {
     const classes = useStyles();
+    const history =useHistory()
     const [checked, setChecked] = useState([0]);
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -85,11 +88,13 @@ export default function RecipeDetail({recipe, isSearch}) {
                     <Button
                         color="secondary"
                         component={Link}
-                        to={isSearch?'/search':'/'}
+                        onClick={()=>{
+                            history.goBack()
+                        }}
                         variant="outlined"
                         startIcon={<ReturnIcon />}
                         >
-                        {isSearch?'Back to Search':'Back to Home'}
+                        {'Go Back'}
                     </Button>
                 </Grid>
 

@@ -4,19 +4,16 @@ import {
     Box,
   } from '@material-ui/core';
 import FoodDisplayCard from './FoodDisplayCard';
-import { reduxSelector } from '../../store/index'
 
-export default function FoodGallery() {
+export default function FoodGallery({data, md ,lg ,sm ,xs}) {
 
-    const recipeData = reduxSelector(store=>store.recipes.recipeData)
-    // console.log(recipeData)
     return (
         <Box m={2}>
         <Grid container spacing={4}>
 
-        { recipeData&&recipeData.map((each)=>{
+        {data&&data.map((each)=>{
                 return(
-                <Grid lg={6} md={6} sm={12} item>
+                <Grid lg={lg} md={md} sm={sm} xs={xs} item>
                     <FoodDisplayCard recipe={each}/>
                 </Grid>
                 )
