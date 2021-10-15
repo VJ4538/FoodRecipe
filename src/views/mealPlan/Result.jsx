@@ -159,7 +159,7 @@ export default function Result() {
                         }
                         resetForm()
                     }catch(e){
-                    console.log(e)
+                        console.log(e)
                     }
 
                 }}

@@ -2,14 +2,12 @@ import React, {useState, useEffect} from 'react'
 import Page from '../../components/Page'
 import BMICalculator from './CalculatorForm/BMICalculator'
 import CalorieCalculator from './CalculatorForm/CalorieCalculator'
-import Narbar from '../navBar/Narbar'
 import { 
     Box,
     Tabs,
     Tab,
     Divider,
     Paper,
-    Container,
     makeStyles
 } from '@material-ui/core'
 
@@ -30,10 +28,6 @@ const useStyles= makeStyles({
         backgroundColor:'#F6F6F6',
         borderTopRightRadius:'0px',
         borderTopLeftRadius:'0px',
-    },
-    navBar:{
-        borderBottomRightRadius:'0px',
-        borderBottomLeftRadius:'0px',
     },
     tabMenu:{
         fontFamily:'Zen Dots',
@@ -69,41 +63,32 @@ export default function Index() {
 
         }
 
-        //Reset results when tab change 
-        useEffect(()=>{
-            // console.log('useEffect running resetting results')
-            dispatch(resetResults())
-        },[dispatch, currentTab])
+    useEffect(()=>{
+        // console.log('useEffect running resetting results')
+        dispatch(resetResults())
+    },[dispatch, currentTab])
 
     return (
-        <Page title='Calculators'>
-            <Container size='lg' className={classes.root} >
-                <Paper elevation={4} className={classes.navBar}>
-                    <Narbar />
+        <Page title='Calculator'>
+            <Box m={3} component={Paper}>
+                <Box p={2}>
+                    <Tabs
+                        onChange={handleTabsChange}
+                        scrollButtons='auto'
+                        value={currentTab}
+                        variant='scrollable'
+                        textColor='Primary'
+                    >
+                        {tabs.map((tab) => (
+                        <Tab className={classes.tabMenu} key={tab.value} label={tab.label} value={tab.value} />
+                        ))}
+                    </Tabs>
                     <Divider />
-                </Paper>
-                <Paper elevation={4} className={classes.content}>
-                    <Box m={3} component={Paper}>
-                        <Box p={2}>
-                            <Tabs
-                                onChange={handleTabsChange}
-                                scrollButtons='auto'
-                                value={currentTab}
-                                variant='scrollable'
-                                textColor='Primary'
-                            >
-                                {tabs.map((tab) => (
-                                <Tab className={classes.tabMenu} key={tab.value} label={tab.label} value={tab.value} />
-                                ))}
-                            </Tabs>
-                            <Divider />
-                        </Box>
+                </Box>
 
-                    {currentTab==='BMI'&& <BMICalculator />}
-                    {currentTab==='Calorie'&& <CalorieCalculator />}
-                    </Box>
-                </Paper>
-            </Container>
+                {currentTab==='BMI'&& <BMICalculator />}
+                {currentTab==='Calorie'&& <CalorieCalculator />}
+            </Box>
         </Page>
     )
 }

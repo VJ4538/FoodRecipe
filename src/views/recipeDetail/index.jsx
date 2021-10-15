@@ -1,15 +1,8 @@
 import React, {useEffect, useCallback, useState} from 'react'
 import Page from '../../components/Page'
-import Narbar from '../navBar/Narbar'
 import RecipeDetail from './RecipeDetail'
 
-import { 
-    Divider,
-    Paper,
-    Container,
-    makeStyles,
-    LinearProgress,
-} from '@material-ui/core'
+import { LinearProgress } from '@material-ui/core'
 
 import {
     reduxDispatch,
@@ -21,28 +14,8 @@ import ErrorBar from '../errors/ErrorBar'
 
 import { setNavPosition } from '../../slices/navbar'
 
-const useStyles= makeStyles({
-    root:{
-        paddingTop:'5vh',
-        paddingBottom:'5vh'
-    },
-    content:{
-        paddingTop:'1%',
-        height:'80vh',
-        overflow:'auto',
-        borderTopRightRadius:'0px',
-        borderTopLeftRadius:'0px',
-    },
-    navBar:{
-        borderBottomRightRadius:'0px',
-        borderBottomLeftRadius:'0px',
-    }
-})
-
-
 export default function Index(props) {
     // console.log(props)
-    const classes =useStyles()
     const dispatch=reduxDispatch()
     const [isloading, setIsLoading]=useState(true)
     const [errorState, setErrorState] =useState({
@@ -93,27 +66,18 @@ export default function Index(props) {
 
     return (
         <Page title='Recipe Detail'>
-            <Container size='lg' className={classes.root} >
                 {errorState.open&& 
                     <ErrorBar 
                         errorState={errorState}
                         handleClose={handleClose}
                     />
                 }
-                <Paper elevation={4} className={classes.navBar}>
-                    <Narbar />
-                    <Divider />
-                </Paper>
-                <Paper elevation={4} className={classes.content}>
                     {isloading?
                         <LinearProgress />
                     :
                         recipe.recipeDetail &&
-                        <RecipeDetail recipe={recipe.recipeDetail} isSearch={isSearch} />
-                    }
-                    
-                </Paper>
-            </Container>
+                    <RecipeDetail recipe={recipe.recipeDetail} isSearch={isSearch} />
+                }
         </Page>
     )
 }

@@ -59,10 +59,24 @@
 ### Bug Fix:
 - Netlify SPA routing issue
 - Navbar active
-- 
+
 ### Future updates: 
 - Account
 - Revamp layout and styling design
+
+
+## **Version 0.0.7**
+### Date: 10/14/2021
+### Changes:
+- Added page favicon
+- Revised Navbar and DRY-ed Navbar code
+- Enhanced user interface response in search and DRD-ed search query code
+- Removed legacy search component
+- Revised routes.js, added more specific route path
+
+
+
+
 
 
 

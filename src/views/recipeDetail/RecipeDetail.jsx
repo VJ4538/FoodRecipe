@@ -1,6 +1,7 @@
 import React, { useState }from 'react'
 import { 
     Container,
+    Paper,
     makeStyles,
     CardMedia,
     Box,
@@ -36,8 +37,6 @@ import Title from '../../components/Title';
 
 import { useHistory } from 'react-router-dom';
 
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTypography-gutterBottom': {
@@ -59,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     Ingredients:{
         maxHeight:'450px',
         overflow:'auto'
+    },
+    background:{
+        backgroundColor:'#fff',
+        marginTop:0
     }
 }));
 
@@ -80,11 +83,13 @@ export default function RecipeDetail({recipe}) {
       };
 
     return (
-        <React.Fragment>
-            <Container 
-                maxWidth="lg"
+            <Box
+              component={Paper}
+              p={4}
+              className={classes.background}
             >   
-                <Grid lg={12} md={12} sm={12} item mt={2} align='right'>
+
+                <Box align='right'>
                     <Button
                         color="secondary"
                         component={Link}
@@ -96,9 +101,9 @@ export default function RecipeDetail({recipe}) {
                         >
                         {'Go Back'}
                     </Button>
-                </Grid>
+                </Box>
 
-                {/* <Title title={'Recipe Detail:'} includeDivider={true} /> */}
+             {/* <Title title={'Recipe Detail:'} includeDivider={true} /> */}
 
               <Grid container   
                 direction="row"
@@ -109,11 +114,13 @@ export default function RecipeDetail({recipe}) {
                         <Box mt={2} mb={1} >
                             <Title title={recipe&&recipe.title} includeDivider={true} />
                         </Box>
+                        
                         <CardMedia
                             component="img"
                             alt={`${recipe.title} image`}
                             image={recipe.image}
                         />
+
                         <Box mt={2} className={classes.flexContainer}>
                             <Typography color="textSecondary" variant="h6" gutterBottom>
                                 <AlarmIcon className={classes.recipeIcon} /> 
@@ -192,7 +199,6 @@ export default function RecipeDetail({recipe}) {
                 :<ListItemText primary={`No Instructions from recivied from sponcular.`} />
                 }
                 </List>
-            </Container>
-        </React.Fragment>
+            </Box>
     )
 }

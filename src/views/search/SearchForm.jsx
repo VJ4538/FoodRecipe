@@ -124,53 +124,30 @@ export default function SearchForm() {
       const { page, pageSize } = pageInfo;
       const pageQuery = `&offset=${page*pageSize}&number=${pageSize}`
        //Basic Query
-       let query=searchProps.searchStr&&`query=${searchProps.searchStr}`;
+       
+       let query=searchProps.searchStr&&`query=${searchProps.searchStr}`
+       if(searchProps.cuisineType!=='none') query+=`&cuisine=${searchProps.cuisineType}`
+       if(searchProps.dietType!=='none')query+=`&diet=${searchProps.dietType}`
 
-       if(searchProps.cuisineType!=='none'){
-         query+=`&cuisine=${searchProps.cuisineType}`
-       }
-       if(searchProps.dietType!=='none'){
-         query+=`&diet=${searchProps.dietType}`
-       }
        if(searchProps.includeIngredients.length>0){
-         let ingredients=''
-         searchProps.includeIngredients.forEach((each)=>{
-           ingredients+=`${each},`
-         })
-         let finalIngredients=ingredients.slice(0, ingredients.length-1)
-         query+=`&includeIngredients=${finalIngredients}`
+          let ingredients=''
+          searchProps.includeIngredients.forEach((each)=>{
+            ingredients+=`${each},`
+          })
+          let finalIngredients=ingredients.slice(0, ingredients.length-1)
+          query+=`&includeIngredients=${finalIngredients}`
        }
-     
+
        //Nutrients Query
        if(searchProps.open){
-
-         if(searchProps.maxProtein){
-           query+=`&maxProtein=${searchProps.maxProtein}`
-         }
-         if(searchProps.minProtein){
-           query+=`&minProtein=${searchProps.minProtein}`
-         }
-
-         if(searchProps.maxCalories){
-           query+=`&maxCalories=${searchProps.maxCalories}`
-         }
-         if(searchProps.minCalories){
-           query+=`&minCalories=${searchProps.minCalories}`
-         }
-
-         if(searchProps.maxFat){
-           query+=`&maxFat=${searchProps.maxFat}`
-         }
-         if(searchProps.minFat){
-           query+=`&minFat=${searchProps.minFat}`
-         }
-
-         if(searchProps.maxCarbs){
-           query+=`&maxCarbs=${searchProps.maxCarbs}`
-         }
-         if(searchProps.minCarbs){
-           query+=`&minCarbs=${searchProps.minCarbs}`
-         }
+         if(searchProps.maxProtein)query+=`&maxProtein=${searchProps.maxProtein}`
+         if(searchProps.minProtein)query+=`&minProtein=${searchProps.minProtein}`
+         if(searchProps.maxCalories)query+=`&maxCalories=${searchProps.maxCalories}`
+         if(searchProps.minCalories)query+=`&minCalories=${searchProps.minCalories}`
+         if(searchProps.maxFat)query+=`&maxFat=${searchProps.maxFat}`
+         if(searchProps.minFat)query+=`&minFat=${searchProps.minFat}`
+         if(searchProps.maxCarbs)query+=`&maxCarbs=${searchProps.maxCarbs}`
+         if(searchProps.minCarbs)query+=`&minCarbs=${searchProps.minCarbs}`
        }
       //  console.log(query+pageQuery)
        try{
@@ -755,7 +732,7 @@ export default function SearchForm() {
                               <Button
                                   component={Link}
                                   fontSize='small'
-                                  to={`/recipe/${each.id}`}
+                                  to={`/recipes/${each.id}`}
                               >
                                   <SvgIcon fontSize='small'>
                                     <ArrowRightIcon />
@@ -766,6 +743,13 @@ export default function SearchForm() {
                         </TableRow>
                     )
                     })}
+
+                    {searchResult.results && searchResult.results.length===0 && 
+                    <TableRow >
+                      <Typography color='textSecondary' variant='body2'>
+                        No results found please try again.
+                      </Typography>
+                    </TableRow>}
                 </TableBody>
                 )}
           </Table>

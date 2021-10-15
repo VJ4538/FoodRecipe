@@ -1,45 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import Result from './Result'
-import Page from '../../components/Page'
-import Narbar from '../navBar/Narbar'
-import { 
-    Divider,
-    Paper,
-    Container,
-    makeStyles
-} from '@material-ui/core'
-
-import {
-    reduxDispatch,
-} from '../../store/index'
-
-import { fetchRandomRecipe } from '../../slices/recipes'
-import ErrorBar from '../errors/ErrorBar';
-
+import React, {useEffect, useState, useCallback} from 'react'
+import { reduxDispatch } from '../../store/index'
 import { useHistory } from 'react-router-dom'
 import { setNavPosition } from '../../slices/navbar'
+import { fetchRandomRecipe } from '../../slices/recipes'
+import ErrorBar from '../errors/ErrorBar';
+import Page from '../../components/Page'
+import Result from './Result'
 
 let init =false;
-
-const useStyles= makeStyles({
-    root:{
-        paddingTop:'5vh',
-        paddingBottom:'5vh'
-    },
-    content:{
-        paddingTop:'1%',
-        height:'80vh',
-        overflow:'auto',
-        backgroundColor:'#F6F6F6',
-        borderTopRightRadius:'0px',
-        borderTopLeftRadius:'0px',
-    },
-    navBar:{
-        borderBottomRightRadius:'0px',
-        borderBottomLeftRadius:'0px',
-    }
-})
-
 
 export default function Index() {
     const dispatch=reduxDispatch()
@@ -49,7 +17,7 @@ export default function Index() {
         open:false,
         msg:'Something went Wrong!'
     });
-
+ 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
           return
@@ -60,12 +28,11 @@ export default function Index() {
         })
     };
 
-    useEffect(()=>{
+    const fetchingRandomRecipes = useCallback(async (number) => {
         if(!init){
             try{
             init=true;
-            const result = dispatch(fetchRandomRecipe(4))
-            result.then((result)=>{
+            const result = await dispatch(fetchRandomRecipe(number))
                 if(result.error){
                     // console.log(result.error)
                     const errorType =result.error.message.split("")
@@ -76,12 +43,15 @@ export default function Index() {
                         open:true
                       })
                 }
-            })
             }catch(e){
-                // console.error(e)
+                console.error(e)
             }
         } 
     },[dispatch])
+
+    useEffect(()=>{
+        fetchingRandomRecipes(4)
+    },[dispatch, fetchingRandomRecipes])
 
     useEffect(() => {
         if(history.location.pathname==='/'){
@@ -89,24 +59,16 @@ export default function Index() {
         }
     }, [dispatch, history])
 
-    const classes =useStyles()
     return (
-        <Page title='Home'>
-            <Container size='lg' className={classes.root} >
-                {errorState.open&& 
-                    <ErrorBar 
-                        errorState={errorState}
-                        handleClose={handleClose}
-                    />
-                }
-                <Paper elevation={4} className={classes.navBar}>
-                    <Narbar />
-                    <Divider />
-                </Paper>
-                <Paper elevation={4} className={classes.content}>
-                    <Result/>
-                </Paper>
-            </Container>
+        <Page title='Home' >
+            {errorState.open&& 
+                <ErrorBar 
+                    errorState={errorState}
+                    handleClose={handleClose}
+                />
+            }
+
+            <Result/>
         </Page>
     )
 }

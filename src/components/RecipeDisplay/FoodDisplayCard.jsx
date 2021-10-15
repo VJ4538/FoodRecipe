@@ -75,7 +75,7 @@ export default function FoodDisplayCard({recipe}) {
                 <CardActions className={classes.cardActions} >
                     <Button 
                         component={Link}
-                        to={`/recipe/${recipe.id}`}
+                        to={`/recipes/${recipe.id}`}
                         color='secondary' 
                         variant="outlined" 
                         size="small">

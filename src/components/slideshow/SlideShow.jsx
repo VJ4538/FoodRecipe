@@ -40,8 +40,6 @@ export default function SlideShow(props) {
         </Carousel>
     )
 }
-// Article about Healthy eating habits
-// Article about gain losing weight
 
 function Item(props)
 {
@@ -71,7 +69,7 @@ function Item(props)
             <Box align='right'>
                 <Button 
                     component={Link}
-                    to={`/article/${props.item.link}`}
+                    to={`/articles/${props.item.link}`}
                     color='secondary'
                     variant="outlined" 
                     size={mobileDevice?"small":"medium"}

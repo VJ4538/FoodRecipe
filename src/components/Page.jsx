@@ -1,10 +1,6 @@
-import React, {
-    forwardRef,
-
-  } from 'react';
+import React, { forwardRef } from 'react';
   import { Helmet } from 'react-helmet';
-  import PropTypes from 'prop-types';
-  
+
   const Page = forwardRef(({
     children,
     title = '',
@@ -24,11 +20,6 @@ import React, {
       </div>
     );
   });
-  
-  Page.propTypes = {
-    children: PropTypes.node.isRequired,
-    title: PropTypes.string
-  };
   
   export default Page;
   

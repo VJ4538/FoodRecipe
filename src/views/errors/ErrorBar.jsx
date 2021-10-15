@@ -12,9 +12,9 @@ export default function ErrorBar({errorState,handleClose}) {
     // console.log(errorState)
     return (
         <Snackbar open={errorState.open}  autoHideDuration={5000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {errorState.msg}
-        </Alert>
-    </Snackbar>
+            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                {errorState.msg}
+            </Alert>
+        </Snackbar>
     )
 }
