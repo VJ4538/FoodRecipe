@@ -1,5 +1,8 @@
 # Food Recipe App
-This is a food recipe app developed using react, redux, Material-UI and Spoonacular API.
+
+### Description:
+Designed and developed a food recipe web application using Spoonacular API, React, React router, Redux,
+Material UI, which allow users to search and plan their desired recipe and meal.
 
 ### Purpose:
 1. Help people decide what they want to eat.
