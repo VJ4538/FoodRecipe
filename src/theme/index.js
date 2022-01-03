@@ -1,41 +1,44 @@
-import _ from 'lodash'
-import { colors, createMuiTheme } from '@material-ui/core'
-import { THEMES } from '../constants'
-import { typography } from './typography'
-
-
+import _ from "lodash";
+import { colors, createMuiTheme } from "@material-ui/core";
+import { THEMES } from "../constants";
+import { typography } from "./typography";
 
 const baseTheme = {
-  direction: 'ltr',
+  spacing: 10,
+  direction: "ltr",
   name: THEMES.LIGHT,
-  typography:{...typography,
-  },
+  typography: { ...typography },
   overrides: {
-    MuiInputBase: {
-      input: {
-        '&::placeholder': {
-          opacity: 1,
-          color: colors.blueGrey[600],
-        },
+    MuiFormControl: {
+      root: {
+        width:'100%'
       },
     },
+    MuiDialogActions: {
+      root: {
+        paddingLeft: '16px',
+        paddingRight: '0px',
+      }
+    }
   },
   palette: {
-    type: 'light',
+    type: "light",
     action: {
       active: colors.blueGrey[600],
     },
     background: {
-      default: '#d2c8c8',
-      dark: '#f7f7f0',
+      default: "#d2c8c8",
+      dark: "#f7f7f0",
       paper: colors.common.white,
+      main: "#57CC99",
+      light: "#F6F6F6",
     },
     primary: {
-      main: '#57CC99',
+      main: "#57CC99",
     },
 
     secondary: {
-      main: '#57CC99',
+      main: "#57CC99",
     },
 
     text: {
@@ -43,10 +46,10 @@ const baseTheme = {
       secondary: colors.blueGrey[600],
     },
   },
-}
+};
 
 export const createTheme = () => {
-  let theme = createMuiTheme(_.merge({}, baseTheme))
+  let theme = createMuiTheme(_.merge({}, baseTheme));
 
-  return theme
-}
+  return theme;
+};

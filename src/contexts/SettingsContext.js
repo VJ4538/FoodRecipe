@@ -1,22 +1,18 @@
-import React, {
-  createContext,
-  useEffect,
-  useState
-} from 'react';
-import _ from 'lodash';
-import { THEMES } from '../constants';
+import React, { createContext, useEffect, useState } from "react";
+import _ from "lodash";
+import { THEMES } from "../constants";
 
 const defaultSettings = {
-  direction: 'ltr',
+  direction: "ltr",
   responsiveFontSizes: true,
-  theme: THEMES.LIGHT
+  theme: THEMES.LIGHT,
 };
 
 export const restoreSettings = () => {
   let settings = null;
 
   try {
-    const storedData = window.localStorage.getItem('settings');
+    const storedData = window.localStorage.getItem("settings");
 
     if (storedData) {
       settings = JSON.parse(storedData);
@@ -31,16 +27,18 @@ export const restoreSettings = () => {
 };
 
 export const storeSettings = (settings) => {
-  window.localStorage.setItem('settings', JSON.stringify(settings));
+  window.localStorage.setItem("settings", JSON.stringify(settings));
 };
 
 const SettingsContext = createContext({
   settings: defaultSettings,
-  saveSettings: () => { }
+  saveSettings: () => {},
 });
 
 export const SettingsProvider = ({ settings, children }) => {
-  const [currentSettings, setCurrentSettings] = useState(settings || defaultSettings);
+  const [currentSettings, setCurrentSettings] = useState(
+    settings || defaultSettings,
+  );
 
   const handleSaveSettings = (update = {}) => {
     const mergedSettings = _.merge({}, currentSettings, update);
@@ -65,9 +63,8 @@ export const SettingsProvider = ({ settings, children }) => {
     <SettingsContext.Provider
       value={{
         settings: currentSettings,
-        saveSettings: handleSaveSettings
-      }}
-    >
+        saveSettings: handleSaveSettings,
+      }}>
       {children}
     </SettingsContext.Provider>
   );
