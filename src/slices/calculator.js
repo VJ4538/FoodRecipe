@@ -80,9 +80,9 @@ export const calculateCalorieResult = (data) => (dispatch) => {
   }
 
   if (goal === "gain") {
-    result.goal = maintainResult + calories;
+    result.goal = +maintainResult + calories;
   } else {
-    result.goal = maintainResult - calories;
+    result.goal = +maintainResult - calories;
   }
 
   dispatch(slice.actions.setCalorieResult(result));
