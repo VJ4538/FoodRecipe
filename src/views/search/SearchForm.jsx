@@ -391,7 +391,7 @@ export default function SearchForm() {
                             });
                           }}>
                           <Title
-                            title='Complex search:'
+                            title='Complex Search:'
                             includeDivider={true}
                           />
 

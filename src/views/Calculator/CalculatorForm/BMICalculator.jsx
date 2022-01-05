@@ -39,7 +39,7 @@ const BMICalculator = () => {
   const BMIResult = reduxSelector((store) => store.calculator.BmiResult);
   return (
     <Formik
-      data-testid="BMIcalculator"
+      data-testid='BMIcalculator'
       validateOnChange={true}
       initialValues={{
         weight: "",
@@ -51,10 +51,10 @@ const BMICalculator = () => {
           .min(1, "Please enter a valid weight")
           .required("Please enter a valid weight"),
         heightInch: Yup.number()
-          .min(1, "Please enter a valid height")
+          .min(0, "Please enter a valid height")
           .required("Please enter a valid height"),
         heightFeet: Yup.number()
-          .min(1, "Please enter a valid height")
+          .min(0, "Please enter a valid height")
           .required("Please enter a valid height"),
       })}
       onSubmit={async (values, { resetForm }) => {
@@ -133,7 +133,6 @@ const BMICalculator = () => {
                         type='number'
                         label='Height : feet'
                         name='heightFeet'
-                        placeholder='Height : feet'
                         value={values.heightFeet}
                         onChange={handleChange}
                         variant='outlined'></TextField>
@@ -146,7 +145,6 @@ const BMICalculator = () => {
                         type='number'
                         label='Height : inch'
                         name='heightInch'
-                        placeholder='Height : inch'
                         value={values.heightInch}
                         onChange={handleChange}
                         variant='outlined'></TextField>
@@ -159,7 +157,6 @@ const BMICalculator = () => {
                         type='number'
                         label='Weight : pounds'
                         name='weight'
-                        placeholder='Weight : pounds'
                         value={values.weight}
                         onChange={handleChange}
                         variant='outlined'></TextField>

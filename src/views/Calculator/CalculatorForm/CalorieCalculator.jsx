@@ -55,19 +55,19 @@ const CalorieCalculator = () => {
       validationSchema={Yup.object().shape({
         weight: Yup.number()
           .min(1, "Please enter a valid weight")
-          .required("Please enter a weight"),
+          .required("Please enter a valid weight"),
         activity: Yup.number()
           .min(1, "Please select one")
           .required("Please select one"),
         age: Yup.number()
           .min(1, "Please enter a valid age")
-          .required("Please enter your age"),
+          .required("Please enter a valid age"),
         gender: Yup.string().required("Please select a gender"),
         heightInch: Yup.number()
-          .min(1, "Please enter a valid height")
+          .min(0, "Please enter a valid height")
           .required("Please enter a valid height"),
         heightFeet: Yup.number()
-          .min(1, "Please enter a valid height")
+          .min(0, "Please enter a valid height")
           .required("Please enter a valid height"),
         goalAmount: Yup.number()
           .min(1, "Please enter a valid goal amount")

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FoodDisplayCard({ recipe }) {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} data-cy='Recipe-Card'>
       {recipe.image && (
         <CardMedia
           component='img'
