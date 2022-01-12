@@ -9,14 +9,20 @@
 // ***********************************************
 //
 
-Cypress.Commands.add("getExist", (query, amount=1) => {
+Cypress.Commands.add("getExist", (query, amount = 1) => {
   cy.get(query).should("have.length", amount);
 });
 
-Cypress.Commands.add("containExist", (queryElement, queryContent, amount=1) => {
-  cy.contains(queryElement, queryContent).should("have.length", amount);
-});
+Cypress.Commands.add(
+  "containExist",
+  (queryElement, queryContent, amount = 1) => {
+    cy.contains(queryElement, queryContent).should("have.length", amount);
+  },
+);
 
-Cypress.Commands.add("typeInputCheckValue", (query,value) => {
-  cy.get(query).should("have.length", 1).type(value).should("have.value", value);
+Cypress.Commands.add("typeInputCheckValue", (query, value) => {
+  cy.get(query)
+    .should("have.length", 1)
+    .type(value)
+    .should("have.value", value);
 });
